@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sekai_news/screens/bottom_nav_bar/bottom_navigation_bar/bottom_nav.dart';
 import 'package:sekai_news/screens/bottom_nav_bar/bottom_navigation_bar/main_nav_screen.dart';
 
 void main() {
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
         splashFactory: NoSplash.splashFactory,
         highlightColor: Colors.transparent,
         bottomNavigationBarTheme:const BottomNavigationBarThemeData(elevation: 0,backgroundColor: Colors.white,type: BottomNavigationBarType.shifting,selectedItemColor: Colors.blueAccent,unselectedItemColor: Colors.grey,landscapeLayout: BottomNavigationBarLandscapeLayout.centered,showSelectedLabels: false,selectedIconTheme: IconThemeData(size: 50)),
-        appBarTheme: const AppBarTheme(backgroundColor: Colors.blueAccent,foregroundColor: Colors.white,elevation: 0,centerTitle: true,),
+        appBarTheme: const AppBarTheme(backgroundColor: Colors.blueAccent,foregroundColor: Colors.black,elevation: 0,centerTitle: true,),
       ),
       home: const MainNavScreen(),
     );
