@@ -11,11 +11,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      color: Colors.white54,
       theme: ThemeData(
         splashColor: Colors.transparent,
         splashFactory: NoSplash.splashFactory,
         highlightColor: Colors.transparent,
-        bottomNavigationBarTheme:const BottomNavigationBarThemeData(elevation: 0,backgroundColor: Colors.white,type: BottomNavigationBarType.shifting,selectedItemColor: Colors.blueAccent,unselectedItemColor: Colors.grey,landscapeLayout: BottomNavigationBarLandscapeLayout.centered,showSelectedLabels: false,selectedIconTheme: IconThemeData(size: 50)),
+        bottomNavigationBarTheme:const BottomNavigationBarThemeData(elevation: 0,backgroundColor: Colors.white,type: BottomNavigationBarType.shifting,unselectedItemColor: Colors.grey,landscapeLayout: BottomNavigationBarLandscapeLayout.centered,showSelectedLabels: false,selectedIconTheme: IconThemeData(size: 50)),
         appBarTheme: const AppBarTheme(backgroundColor: Colors.blueAccent,foregroundColor: Colors.black,elevation: 0,centerTitle: true,),
       ),
       home: const MainNavScreen(),
