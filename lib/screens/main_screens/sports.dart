@@ -63,7 +63,7 @@ class _SportsScreenState extends State<SportsScreen> {
             floating: true,
             pinned: true,
             elevation: 0,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+            //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           ),
         ],
         body:_sports.isEmpty ? const Center(child: CupertinoActivityIndicator(),)

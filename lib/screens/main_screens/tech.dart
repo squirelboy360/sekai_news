@@ -59,7 +59,7 @@ void dispose() {
             floating: true,
             pinned: true,
             elevation: 0,
-            shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
+            //shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
           ),
         ],
         body:_tech.isEmpty ? const Center(child: CupertinoActivityIndicator(),)

@@ -61,7 +61,7 @@ class _BusinessScreenState extends State<BusinessScreen> {
               floating: true,
               pinned: true,
               elevation: 0,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+              //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
             ),
           ],
           body:_business.isEmpty ? const Center(child: CupertinoActivityIndicator(),)
