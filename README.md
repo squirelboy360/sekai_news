@@ -1,16 +1,7 @@
 # sekai_news
 
-A new Flutter project.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#Description
+Sekai News is an app which i can proudly say is completed but is still undergoing some UI and functional changes.
+Though this was intended to be a test project, it will still get certain upgrades. This app fetches news from an API that as well fetches news from various blogs and sites and then samurizes it so as to make reading more pleasant. 
+And if you're wondering were the name 'Sekai' cames from, you guessed right. Its from Japan. And it means the world.
