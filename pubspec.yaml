@@ -39,6 +39,7 @@ dependencies:
   flutter_speed_dial: ^6.2.0
   flutter_cache_manager: ^3.3.0
   flutter_launcher_icons_maker: "^0.10.1"
+  http: ^0.13.6
 
 dev_dependencies:
   flutter_test:
@@ -61,14 +62,6 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
-flutter_icons:
-  android: true
-  ios: true
-  #macos: true
-  #windows: true
-  web: true
-  image_path: "assets/icon.png"
 
   assets:
     - assets/
@@ -101,3 +94,11 @@ flutter_icons:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_icons:
+  android: true
+  ios: true
+  #macos: true
+  #windows: true
+  web: true
+  image_path: "assets/icon.png"

@@ -17,14 +17,13 @@ class SportsScreen extends StatefulWidget {
   State<SportsScreen> createState() => _SportsScreenState();
 }
 List<Sports>_sports=[];
-bool _mounted = false;
 class _SportsScreenState extends State<SportsScreen> {
 
   Future<void>fetchSports()async{
     final response = await http.get(Uri.parse(sportsUrl));
     if (response.statusCode==200){
       final data = jsonDecode(response.body);
-      if(_mounted){
+      if(mounted){
         setState(() {
           _sports=List.from(data['data']).map((e) => Sports.fromJson(e)).toList();
         });
@@ -43,14 +42,8 @@ class _SportsScreenState extends State<SportsScreen> {
 
   @override
   void initState() {
-    _mounted = true;
     fetchSports();
     super.initState();
-  }
-  @override
-  void dispose() {
-    _mounted = false;
-    super.dispose();
   }
 
   @override

@@ -16,7 +16,6 @@ class TechScreen extends StatefulWidget {
   State<TechScreen> createState() => _TechScreenState();
 }
 List<Tech>_tech=[];
-bool _mounted = false;
 class _TechScreenState extends State<TechScreen> {
 
   Future<void>fetchTech()async{
@@ -43,14 +42,8 @@ class _TechScreenState extends State<TechScreen> {
 
   @override
   void initState() {
-    _mounted = true;
     fetchTech();
     super.initState();
-  }
-@override
-void dispose() {
-    _mounted = false;
-    super.dispose();
   }
 
   @override

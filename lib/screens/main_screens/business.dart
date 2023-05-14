@@ -18,14 +18,14 @@ class BusinessScreen extends StatefulWidget {
 }
 
 List<Business>_business = [];
-bool _mounted = false;
+//bool _mounted = false;
 
 class _BusinessScreenState extends State<BusinessScreen> {
   Future<void>fetchBusiness()async{
     final response = await http.get(Uri.parse(businessUrl));
     if(response.statusCode==200){
       final data = jsonDecode(response.body);
-      if(_mounted){
+      if(mounted){
         setState(() {
           _business = List.from(data['data']).map((e) => Business.fromJson(e)).toList();
         });
@@ -37,15 +37,8 @@ class _BusinessScreenState extends State<BusinessScreen> {
 
   @override
   void initState() {
-    _mounted = true;
    fetchBusiness();
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    _mounted = false;
-    super.dispose();
   }
 
   Future<void>_refresh()async{

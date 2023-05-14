@@ -18,7 +18,6 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 List<Home>_news=[];
-bool _mounted = false;
 class _HomeScreenState extends State<HomeScreen> {
 
 Future<dynamic>fetchGeneralNews()async{
@@ -26,7 +25,7 @@ Future<dynamic>fetchGeneralNews()async{
 
   if(response.statusCode==200){
     final data = jsonDecode(response.body);
-    if(_mounted){
+    if(mounted){
       setState(() {
         _news=List.from(data['data']).map((e) => Home.fromJson(e)).toList();
       });
@@ -39,16 +38,9 @@ Future<dynamic>fetchGeneralNews()async{
 
 @override
 void initState() {
-  _mounted = true;
    fetchGeneralNews();
     super.initState();
   }
-
-@override
-void dispose() {
-_mounted = false;
-  super.dispose();
-}
 
 Future<void>_refresh()async{
   await fetchGeneralNews();
