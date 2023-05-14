@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -51,9 +53,7 @@ _mounted = false;
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0x00f5f8fa),
-     body:_news.isEmpty ? const Center(
-       child: CupertinoActivityIndicator(animating: true,),
-     ): NestedScrollView(
+     body: NestedScrollView(
        headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
            title: Text('General News',style: GoogleFonts.albertSans(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white70)),
@@ -67,7 +67,9 @@ _mounted = false;
             //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
          ),
        ],
-       body: ListView.builder(addAutomaticKeepAlives: true,itemCount: _news.length,itemBuilder: (context,index){
+       body:_news.isEmpty ? const Center(
+         child: CupertinoActivityIndicator(animating: true,),
+       ): ListView.builder(addAutomaticKeepAlives: true,itemCount: _news.length,itemBuilder: (context,index){
        final news=_news[index];
        return Padding(
          padding: const EdgeInsets.all(0.0),

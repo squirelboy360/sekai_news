@@ -62,7 +62,8 @@ void dispose() {
             shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
           ),
         ],
-        body: ListView.builder(addAutomaticKeepAlives: true,itemCount: _tech.length,itemBuilder: (context,index){
+        body:_tech.isEmpty ? const Center(child: CupertinoActivityIndicator(),)
+            : ListView.builder(addAutomaticKeepAlives: true,itemCount: _tech.length,itemBuilder: (context,index){
           final tech=_tech[index];
           return Padding(
             padding: const EdgeInsets.all(0.0),

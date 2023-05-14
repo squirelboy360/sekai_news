@@ -52,8 +52,7 @@ class _SportsScreenState extends State<SportsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:_sports.isEmpty ? const Center(child: CupertinoActivityIndicator(),)
-          : NestedScrollView(
+      body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(
             title: Text('Sports News',style: GoogleFonts.albertSans(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.black54)),
@@ -67,7 +66,8 @@ class _SportsScreenState extends State<SportsScreen> {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           ),
         ],
-        body:  ListView.builder(addAutomaticKeepAlives: true,itemCount: _sports.length,itemBuilder: (context,index){
+        body:_sports.isEmpty ? const Center(child: CupertinoActivityIndicator(),)
+            :  ListView.builder(addAutomaticKeepAlives: true,itemCount: _sports.length,itemBuilder: (context,index){
           final sports=_sports[index];
           return Padding(
             padding: const EdgeInsets.all(0.0),
