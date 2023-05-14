@@ -14,14 +14,10 @@ class SportsScreen extends StatefulWidget {
   @override
   State<SportsScreen> createState() => _SportsScreenState();
 }
+const url = 'https://inshorts.deta.dev/news?category=sports';
 List<Sports>_sports=[];
 bool _mounted = false;
 class _SportsScreenState extends State<SportsScreen> {
-
-
-  final url = 'https://inshorts.deta.dev/news?category=sports';
-
-
 
   Future<void>fetchSports()async{
     final response = await http.get(Uri.parse(url));
@@ -35,6 +31,13 @@ class _SportsScreenState extends State<SportsScreen> {
     }else{
       throw Exception('error');
     }
+  }
+
+  Future<void>_refresh()async{
+    await fetchSports();
+    setState(() {
+
+    });
   }
 
   @override
@@ -67,31 +70,36 @@ class _SportsScreenState extends State<SportsScreen> {
           ),
         ],
         body:_sports.isEmpty ? const Center(child: CupertinoActivityIndicator(),)
-            :  ListView.builder(addAutomaticKeepAlives: true,itemCount: _sports.length,itemBuilder: (context,index){
+            :  RefreshIndicator(
+          onRefresh: _refresh,
+              backgroundColor: Colors.green,
+              color: Colors.white,
+              child: ListView.builder(addAutomaticKeepAlives: true,itemCount: _sports.length,itemBuilder: (context,index){
           final sports=_sports[index];
           return Padding(
-            padding: const EdgeInsets.all(0.0),
-            child: InkWell(
-              onTap: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SportDetailedScreen(imageUrl: sports.imageUrl, content: sports.content, title: sports.title, date: sports.date, author: sports.author)));
-              },
-              child: ListTile(
-                title: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Hero(tag: sports.imageUrl,child: ClipRRect(borderRadius: BorderRadius.circular(30),child: Image.network(sports.imageUrl,errorBuilder:(context, error, stackTrace) => const CupertinoActivityIndicator(),)),),
-                    ),
-                    Text(sports.title),
-                  ],
+              padding: const EdgeInsets.all(0.0),
+              child: InkWell(
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SportDetailedScreen(imageUrl: sports.imageUrl, content: sports.content, title: sports.title, date: sports.date, author: sports.author)));
+                },
+                child: ListTile(
+                  title: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Hero(tag: sports.imageUrl,child: ClipRRect(borderRadius: BorderRadius.circular(30),child: Image.network(sports.imageUrl,errorBuilder:(context, error, stackTrace) => const CupertinoActivityIndicator(),)),),
+                      ),
+                      Text(sports.title),
+                    ],
+                  ),
+                  subtitle: Text('${sports.date}''-''${sports.time}'),
+                  //leading: Text('test2'),
+                  // trailing: Text('test3'),
                 ),
-                subtitle: Text('${sports.date}''-''${sports.time}'),
-                //leading: Text('test2'),
-                // trailing: Text('test3'),
               ),
-            ),
           );
-        })
+        }),
+            )
       ),
     );
   }

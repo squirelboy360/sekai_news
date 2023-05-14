@@ -33,6 +33,13 @@ class _TechScreenState extends State<TechScreen> {
     }
   }
 
+  Future<void>_refresh()async{
+    await fetchTech();
+    setState(() {
+
+    });
+  }
+
   @override
   void initState() {
     _mounted = true;
@@ -63,31 +70,36 @@ void dispose() {
           ),
         ],
         body:_tech.isEmpty ? const Center(child: CupertinoActivityIndicator(),)
-            : ListView.builder(addAutomaticKeepAlives: true,itemCount: _tech.length,itemBuilder: (context,index){
+            : RefreshIndicator(
+          onRefresh: _refresh,
+              backgroundColor: Colors.redAccent,
+              color: Colors.white,
+              child: ListView.builder(addAutomaticKeepAlives: true,itemCount: _tech.length,itemBuilder: (context,index){
           final tech=_tech[index];
           return Padding(
-            padding: const EdgeInsets.all(0.0),
-            child: InkWell(
-              onTap: (){
-               Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TechDetailedScreen(imageUrl: tech.imageUrl, content: tech.content, title: tech.title, date: tech.date, author: tech.author)));
-              },
-              child: ListTile(
-                title: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Hero(tag: tech.imageUrl,child: ClipRRect(borderRadius: BorderRadius.circular(30),child: Image.network(tech.imageUrl,errorBuilder:(context, error, stackTrace) => const CupertinoActivityIndicator(),)),),
-                    ),
-                    Text(tech.title),
-                  ],
+              padding: const EdgeInsets.all(0.0),
+              child: InkWell(
+                onTap: (){
+                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>TechDetailedScreen(imageUrl: tech.imageUrl, content: tech.content, title: tech.title, date: tech.date, author: tech.author)));
+                },
+                child: ListTile(
+                  title: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Hero(tag: tech.imageUrl,child: ClipRRect(borderRadius: BorderRadius.circular(30),child: Image.network(tech.imageUrl,errorBuilder:(context, error, stackTrace) => const CupertinoActivityIndicator(),)),),
+                      ),
+                      Text(tech.title),
+                    ],
+                  ),
+                  subtitle: Text('${tech.date}''-''${tech.time}'),
+                  //leading: Text('test2'),
+                  // trailing: Text('test3'),
                 ),
-                subtitle: Text('${tech.date}''-''${tech.time}'),
-                //leading: Text('test2'),
-                // trailing: Text('test3'),
               ),
-            ),
           );
-        })
+        }),
+            )
       ),
     );
   }

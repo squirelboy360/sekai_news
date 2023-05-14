@@ -15,12 +15,12 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
+const url = 'https://inshorts.deta.dev/news?category=all';
 List<Home>_news=[];
 bool _mounted = false;
 class _HomeScreenState extends State<HomeScreen> {
 
 Future<dynamic>fetchGeneralNews()async{
-  const url = 'https://inshorts.deta.dev/news?category=all';
   final response= await http.get(Uri.parse(url));
 
   if(response.statusCode==200){
@@ -49,6 +49,13 @@ _mounted = false;
   super.dispose();
 }
 
+Future<void>_refresh()async{
+  await fetchGeneralNews();
+  setState(() {
+
+  });
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,31 +76,37 @@ _mounted = false;
        ],
        body:_news.isEmpty ? const Center(
          child: CupertinoActivityIndicator(animating: true,),
-       ): ListView.builder(addAutomaticKeepAlives: true,itemCount: _news.length,itemBuilder: (context,index){
-       final news=_news[index];
-       return Padding(
-         padding: const EdgeInsets.all(0.0),
-         child: InkWell(
-           onTap: (){
-             Navigator.of(context).push(MaterialPageRoute(builder: (context)=>HomeDetailedScreen(content: news.content,src: news.urlToImage,title: news.title,publishedAt: news.publishedAt,author: news.author,)));
-           },
-           child: ListTile(
-             title: Column(
-               children: [
-                 Padding(
-                   padding: const EdgeInsets.all(8.0),
-                   child: Hero(tag: news.urlToImage,child: ClipRRect(borderRadius: BorderRadius.circular(30),child: Image.network(news.urlToImage,errorBuilder:(context, error, stackTrace) => const CupertinoActivityIndicator(),)),),
-                 ),
-                 Text(news.title),
-               ],
+       ): RefreshIndicator(
+         triggerMode: RefreshIndicatorTriggerMode.anywhere,
+         color: Colors.white,
+         backgroundColor: Colors.blueAccent,
+         onRefresh: _refresh,
+         child: ListView.builder(addAutomaticKeepAlives: true,itemCount: _news.length,itemBuilder: (context,index){
+         final news=_news[index];
+         return Padding(
+           padding: const EdgeInsets.all(0.0),
+           child: InkWell(
+             onTap: (){
+               Navigator.of(context).push(MaterialPageRoute(builder: (context)=>HomeDetailedScreen(content: news.content,src: news.urlToImage,title: news.title,publishedAt: news.publishedAt,author: news.author,)));
+             },
+             child: ListTile(
+               title: Column(
+                 children: [
+                   Padding(
+                     padding: const EdgeInsets.all(8.0),
+                     child: Hero(tag: news.urlToImage,child: ClipRRect(borderRadius: BorderRadius.circular(30),child: Image.network(news.urlToImage,errorBuilder:(context, error, stackTrace) => const CupertinoActivityIndicator(),)),),
+                   ),
+                   Text(news.title),
+                 ],
+               ),
+               subtitle: Text(news.description),
+               //leading: Text('test2'),
+               // trailing: Text('test3'),
              ),
-             subtitle: Text(news.description),
-             //leading: Text('test2'),
-             // trailing: Text('test3'),
            ),
-         ),
-       );
-         })
+         );
+           }),
+       )
      ),
     );
   }
