@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:sekai_news/screens/main_screens/detailed_screens/home/home_detailed_screen.dart';
+import 'package:sekai_news/universal_elements/custom_bg_colors.dart';
+import 'package:sekai_news/universal_elements/links.dart';
 
 import '../../provider_classes/home_class.dart';
 
@@ -15,13 +17,12 @@ class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
-const url = 'https://inshorts.deta.dev/news?category=all';
 List<Home>_news=[];
 bool _mounted = false;
 class _HomeScreenState extends State<HomeScreen> {
 
 Future<dynamic>fetchGeneralNews()async{
-  final response= await http.get(Uri.parse(url));
+  final response= await http.get(Uri.parse(homeurl));
 
   if(response.statusCode==200){
     final data = jsonDecode(response.body);
@@ -59,7 +60,7 @@ Future<void>_refresh()async{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0x00f5f8fa),
+      backgroundColor: mainBgColor,
      body: NestedScrollView(
        headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(

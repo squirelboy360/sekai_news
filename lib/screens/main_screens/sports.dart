@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sekai_news/screens/main_screens/detailed_screens/sports/sports_detailed_screen.dart';
+import 'package:sekai_news/universal_elements/custom_bg_colors.dart';
+import 'package:sekai_news/universal_elements/links.dart';
 
 import '../../provider_classes/sports_class.dart';
 import 'package:http/http.dart' as http;
@@ -14,13 +16,12 @@ class SportsScreen extends StatefulWidget {
   @override
   State<SportsScreen> createState() => _SportsScreenState();
 }
-const url = 'https://inshorts.deta.dev/news?category=sports';
 List<Sports>_sports=[];
 bool _mounted = false;
 class _SportsScreenState extends State<SportsScreen> {
 
   Future<void>fetchSports()async{
-    final response = await http.get(Uri.parse(url));
+    final response = await http.get(Uri.parse(sportsUrl));
     if (response.statusCode==200){
       final data = jsonDecode(response.body);
       if(_mounted){
@@ -55,6 +56,7 @@ class _SportsScreenState extends State<SportsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: mainBgColor,
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(

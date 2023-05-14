@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:sekai_news/screens/main_screens/detailed_screens/tech/tech_detailed_screen.dart';
+import 'package:sekai_news/universal_elements/custom_bg_colors.dart';
+import 'package:sekai_news/universal_elements/links.dart';
 import '../../provider_classes/tech_class.dart';
 
 class TechScreen extends StatefulWidget {
@@ -17,9 +19,8 @@ List<Tech>_tech=[];
 bool _mounted = false;
 class _TechScreenState extends State<TechScreen> {
 
-  final url = 'https://inshorts.deta.dev/news?category=technology';
   Future<void>fetchTech()async{
-    final response = await http.get(Uri.parse(url));
+    final response = await http.get(Uri.parse(techUrl));
 
     if(response.statusCode==200){
       final data = jsonDecode(response.body);
@@ -55,6 +56,7 @@ void dispose() {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: mainBgColor,
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverAppBar(

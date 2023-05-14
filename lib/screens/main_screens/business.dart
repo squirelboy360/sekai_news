@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:sekai_news/screens/main_screens/detailed_screens/business/business_detailed_screen.dart';
-
+import 'package:sekai_news/universal_elements/custom_bg_colors.dart';
+import 'package:sekai_news/universal_elements/links.dart';
+import '';
 import '../../provider_classes/business_class.dart';
 
 class BusinessScreen extends StatefulWidget {
@@ -14,13 +16,13 @@ class BusinessScreen extends StatefulWidget {
   @override
   State<BusinessScreen> createState() => _BusinessScreenState();
 }
-const url = 'https://inshorts.deta.dev/news?category=business';
+
 List<Business>_business = [];
 bool _mounted = false;
 
 class _BusinessScreenState extends State<BusinessScreen> {
   Future<void>fetchBusiness()async{
-    final response = await http.get(Uri.parse(url));
+    final response = await http.get(Uri.parse(businessUrl));
     if(response.statusCode==200){
       final data = jsonDecode(response.body);
       if(_mounted){
@@ -56,6 +58,7 @@ class _BusinessScreenState extends State<BusinessScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: mainBgColor,
       body: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) => [
             SliverAppBar(
